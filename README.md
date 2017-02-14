@@ -1,3 +1,5 @@
+![habu-logo](https://cloud.githubusercontent.com/assets/8162640/22945227/772ed4ac-f2c1-11e6-8a17-e3735d2ec7f6.png)
+
 ## Habu
 
 #### Concise inline styles with theme and mixin support, powered by [aphrodite](https://github.com/Khan/aphrodite).
