@@ -67,6 +67,11 @@ const css = configureCss({ theme, cssProps, cssVals, mixins });
 export default css;
 ```
 
+If you are just experimenting and don't want to bother copy/pasting the abbreviations, you can import them.
+```
+import { configureCss, cssProps, cssVals } from 'habu';
+```
+
 ## Theme
 Theme is an object that can have as many levels as you want, but no arrays.  A typical theme might have colors, breakpoints, and complex css values like shadows or transitions.
 ```
