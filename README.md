@@ -9,7 +9,7 @@ Habu is small utility that gives you the ability to write concise inline styles.
 * Supports themes, mixins, media queries, pseudo-selectors, and css abbreviations
 
 ```
-npm install --save habu
+npm install --save aphrodite habu
 ```
 
 ### Example (React)
@@ -33,9 +33,23 @@ What matters is that the css function inside of the component has been configure
 During configuration, you can pass a theme, mixins, and abbreviations.  Any css property or value is checked against
 the abbreviation dictionaries in attempt to find a match.  If no match is found, the values are assumed to be valid css (css in js).
 
+* 'm:0' -> margin: 0
+* 'p:0' -> padding: 0
 * 'd:b' -> display: block
 * 'd:ib' -> display: inline-block
 * '>900px' -> @media(min-width: 900px)
+
+
+## Css arguments
+The arguments to the css function can be strings, arrays, and falsey values.  Falsey values are removed and nested arrays of any depth are flattened.
+Any non-empty string is interpreted as a style, so if you're using a string as a conditional, make sure to convert it to a boolean with !!.
+```
+const lineItemStyle = css(
+  'p:0',
+  isSelected ? [':hover(c:#464747)', 'bg:#46a2d5'] : [':hover(c:#f0f0f2)', 'bg:#72c251'],
+  isSelected && 'b:1px solid #d9611e'
+);
+```
 
 ## Configuration
 I expect that in the early days of this library that the css property and value abbreviations will evolve while we support more css rules and find the right balance of brevity and legibility.  I recommend copying the abbreviations in the src folder into your own code as a starting point, and don't import them from Habu until they are more stable.
@@ -132,7 +146,6 @@ export function square(size) {
 ```
 css(`bg:url(${ICON_URL})`, 'pngIcon(40px)')
 ```
-
 
 ## Moving forward
 
