@@ -72,6 +72,7 @@ export default {
   bgi: 'backgroundImage',
   bgp: 'backgroundPosition',
   bgz: 'backgroundSize',
+  bgr: 'backgroundRepeat',
   bgcp: 'backgroundClip',
 
   // font
