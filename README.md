@@ -4,7 +4,7 @@
 
 #### Concise inline styles with theme and mixin support, powered by [aphrodite](https://github.com/Khan/aphrodite).
 
-Habu is small utility that gives you the ability to write concise inline styles.
+Habu is a utility that gives you the ability to write concise inline styles.
 * Only dependency (peer-dep) is aphrodite
 * Habu supports all front-end frameworks supported by aphrodite
 * Total size, not gzipped, is 32kb (20kb aphrodite, 12kb habu)
@@ -35,11 +35,11 @@ What matters is that the css function inside of the component has been configure
 During configuration, you can pass a theme, mixins, and abbreviations.  When calling the css function, the format of the strings are analyzed
 to determine if it's a mediaQuery, mixin, pseudo-selector, or css rule.
 
-* 'm:0' -> margin: 0
-* 'p:0' -> padding: 0
-* 'd:b' -> display: block
-* 'd:ib' -> display: inline-block
-* '>900px(d:ib, w:50%)' -> @media(min-width: 900px) { display: 'inline-block', width: '50%' }
+* 'm:0' -> { margin: 0 }
+* 'p:0' -> { padding: 0 }
+* 'd:b' -> { display: block }
+* 'd:ib' -> { display: inline-block }
+* '>900px(d:ib, w:50%)' -> '@media(min-width: 900px)' { display: 'inline-block', width: '50%' }
 
 
 ## Css arguments
@@ -78,12 +78,11 @@ You can always extend/mutate the abbreviation objects before passing them to the
 css('bs:s')   // { borderStyle: 'solid' }
 
 // this is ok
-// assumes borderColor = #888 in the theme
-css('b:1px solid @borderColor')  // { border: '1px solid #888' }
+css('b:1px solid #888')  // { border: '1px solid #888' }
 
 // this is NOT ok
 // might be a future enhancement
-css('b: 1px s @borderColor')   // { border: '1px s #888' }  invalid css
+css('b: 1px s #888')   // { border: '1px s #888' }  invalid css
 ```
 
 
@@ -125,7 +124,7 @@ These examples assume you've included the corresponding abbreviations in the con
 ```
 css('c:@primary')                // { color: 'rgb(38, 177, 32)' }
 css('>@bp.mobile(m:25)')         // '@media (min-width: 600px)' { margin: 25 }
-css('border:1px solid @accent')  // { border: '1px solid rgb(214, 123, 237)' }
+css('b:1px solid @accent')  // { border: '1px solid rgb(214, 123, 237)' }
 ```
 
 ## Pseudo-selectors
@@ -135,9 +134,9 @@ css(':active(bgc:#2592a1)')  // { ':active': { backgroundColor: '#2592a1' } }
 ```
 
 ## Media queries
+If vw or vh is missing, it's assumed to be vw.
+
 ```
-// d:b is display: 'block'
-// if vw or vh is missing, it's assumed to be vw
 css('vw<40em(d:b)')  // '@media (max-width: 40em)': { display: 'block' }
 css('<40em(d:b)')    // '@media (max-width: 40em)': { display: 'block' }
 css('vh>100(d:b)')   // '@media (min-height: 100px)': { display: 'block' }
@@ -145,22 +144,22 @@ css('vh>100(d:b)')   // '@media (min-height: 100px)': { display: 'block' }
 
 ## Mixins
 A mixin is a function with any arity, but all arguments must be strings.
-The mixin should return an array of strings.  The strings can contain all the goodies that you can use in the css function.
+The mixin should return an array of strings which are applied as arguments to the css function.
+The strings can contain all the goodies that you can use in the css function.
 
 ```
 // mixins.js
 
 export function pngIcon(size) {
-  const dimensions = square(size);
   return [
-    ...dimensions,
-    bgs: '100% 100%',  // background-size
-    bgr: 'no-repeat'   // background-repeat
+    ...square(size),
+    'bgz:100% 100%',  // { backgroundSize: '100% 100%' }
+    'bgr:n'           // { backgroundRepeat: 'no-repeat' }
   ];
 }
 
 export function square(size) {
-  return [ `width:${size}`, `height:${size}` ];
+  return [ `w:${size}`, `h:${size}` ];
 }
 ```
 

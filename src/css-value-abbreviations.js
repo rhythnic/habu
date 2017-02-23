@@ -152,6 +152,15 @@ export default {
     cn: 'contain'
   },
 
+  backgroundRepeat: {
+    rx: 'repeat-x',
+    ry: 'repeat-y',
+    r: 'repeat',
+    s: 'space',
+    r: 'round',
+    n: 'no-repeat'
+  },
+
   fontWeight: {
     b: 'bold',
     n: 'normal',
