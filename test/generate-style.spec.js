@@ -74,7 +74,7 @@ test('mixinStyle', () => {
 test('cssRuleStyle', () => {
   expect(styler.cssRuleStyle('position:relative')).toEqual({ position: 'relative' });
   expect(styler.cssRuleStyle('mxw:300')).toEqual({ maxWidth: 300 });
-  expect(styler.cssRuleStyle('cur:po')).toEqual({ cursor: 'pointer' });
+  expect(styler.cssRuleStyle('cu:po')).toEqual({ cursor: 'pointer' });
   expect(styler.cssRuleStyle('bgc:@red')).toEqual({ backgroundColor: config.theme.colors.red });
   expect(styler.cssRuleStyle('invalid')).toBeUndefined();
 });

@@ -1,17 +1,5 @@
 export default {
 
-  // border
-  b: 'border',
-  bt: 'borderTop',
-  br: 'borderRight',
-  bb: 'borderBottom',
-  bl: 'borderLeft',
-  brad: 'borderRadius',
-  shadow: 'boxShadow',
-
-  // float
-  fl: 'float',
-
   // margin
   m: 'margin',
   mt: 'marginTop',
@@ -33,45 +21,83 @@ export default {
 
   // height
   h: 'height',
-  mnh: 'minHeight',
-  mxh: 'maxHeight',
+  mxh: 'minHeight',
+  mnh: 'maxHeight',
 
-  // color
-  c: 'color',
+  // positioning
+  bxs: 'boxSizing',
+  ps: 'position',
+  tp: 'top',
+  bm: 'bottom',
+  rt: 'right',
+  lf: 'left',
+  fl: 'float',
+  ta: 'textAlign',
+  va: 'verticalAlign',
+  cl: 'clear',
+  co: 'content',
+
+  // border
+  b: 'border',
+  bt: 'borderTop',
+  br: 'borderRight',
+  bb: 'borderBottom',
+  bl: 'borderLeft',
+  bdr: 'borderRadius',
+  bc: 'borderColor',
+  bw: 'borderWidth',
+  bcp: 'borderCollapse',
+  bs: 'borderStyle',
+  bsp: 'borderSpacing',
+  bblr: 'borderBottomLeftRadius',
+  bbrr: 'borderBottomRightRadius',
+  btlr: 'borderTopLeftRadius',
+  btrr: 'borderTopRightRadius',
+  bbc: 'borderBottomColor',
+  btc: 'borderTopColor',
+  blc: 'borderLeftColor',
+  brc: 'borderRightColor',
+  bbw: 'borderBottomWidth',
+  btw: 'borderTopWidth',
+  blw: 'borderLeftWidth',
+  brw: 'borderRightWidth',
+  bbs: 'borderBottomStyle',
+  bts: 'borderTopStyle',
+  bls: 'borderLeftStyle',
+  brs: 'borderRightStyle',
 
   // background
   bg: 'background',
   bgc: 'backgroundColor',
   bgi: 'backgroundImage',
   bgp: 'backgroundPosition',
-  bgs: 'backgroundSize',
+  bgz: 'backgroundSize',
+  bgcp: 'backgroundClip',
 
   // font
+  f: 'font',
   fw: 'fontWeight',
-  fs: 'fontSize',
-  fst: 'fontStyle',
+  ff: 'fontFamily',
+  fz: 'fontSize',
+  fs: 'fontStyle',
+  fsm: 'fontSmoothing',
 
   // text
-  txd: 'textDecoration',
-  txt: 'textTransform',
+  c: 'color',
+  td: 'textDecoration',
+  tdc: 'textDecorationColor',
+  tds: 'textDecorationStyle',
+  tdl: 'textDecorationLine',
+  tt: 'textTransform',
   lh: 'lineHeight',
-  ls: 'letterSpacing',
+  lsp: 'letterSpacing',
+  wsp: 'wordSpacing',
   ti: 'textIndent',
   ws: 'whiteSpace',
-  txo: 'textOverflow',
-
-  // align
-  ta: 'textAlign',
-  va: 'verticalAlign',
-
-  // positioning
-  pos: 'position',
-  d: 'display',
-  zi: 'zIndex',
-  top: 'top',
-  bot: 'bottom',
-  rt: 'right',
-  lft: 'left',
+  to: 'textOverflow',
+  dir: 'direction',
+  wb: 'wordBreak',
+  tr: 'textRendering',
 
   // flex
   fx: 'flex',
@@ -86,16 +112,52 @@ export default {
   ord: 'order',
   as: 'alignSelf',
 
-  //opacity
-  op: 'opacity',
-
   // cursor
-  cur: 'cursor',
+  cu: 'cursor',
   pe: 'pointerEvents',
 
+  // overflow
+  ov: 'overflow',
+  ovx: 'overflowX',
+  ovy: 'overflowY',
+  ovw: 'overflowWrap',
+
   // transition
-  trans: 'transition',
+  trn: 'transition',
+  trnp: 'transitionProperty',
+  trndr: 'transitionDuration',
+  trntf: 'transitionTimingFunction',
+  trndl: 'transitionDelay',
 
-  anim: 'animation'
+  // transform
+  tfm: 'transform',
+  tfmo: 'transformOrigin',
 
+  // animation
+  anm: 'animation',
+  anmdi: 'animationDirection',
+  anmdu: 'animationDuration',
+  anmn: 'animationName',
+  anmtf: 'animationTimingFunction',
+  anmdl: 'animationDelay',
+  anmps: 'animationPlayState',
+  anmfm: 'animationFillMode',
+  anmic: 'animationIterationCount',
+
+  // svg
+  sk: 'stroke',
+  skw: 'stroke-width',
+
+  // other
+  d: 'display',
+  sh: 'boxShadow',
+  zi: 'zIndex',
+  op: 'opacity',
+  ol: 'outline',
+  ls: 'listStyle',
+  lst: 'listStyleType',
+  us: 'userSelect',
+  tl: 'tableLayout',
+  qt: 'quotes',
+  tcha: 'touchAction'
 };
