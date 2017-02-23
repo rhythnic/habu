@@ -7,7 +7,7 @@
 Habu is a utility that gives you the ability to write concise inline styles.
 * Only dependency (peer-dep) is aphrodite
 * Habu supports all front-end frameworks supported by aphrodite
-* Total size, not gzipped, is 32kb (20kb aphrodite, 12kb habu)
+* Total size, including aphrodite, is about 9kb gzipped
 * Supports themes, mixins, media queries, pseudo-selectors, and css abbreviations
 
 ```
@@ -15,6 +15,7 @@ npm install --save aphrodite habu
 ```
 
 ### Example (React)
+
 ```
 function MyComponent(props, { css }) {
   const itemStyle = css('d:b', '>900px(d:ib, w:50%)', ':hover(bg:@accentColor)');
@@ -28,6 +29,7 @@ function MyComponent(props, { css }) {
   );
 }
 ```
+
 
 #### Explanation
 In the example, the css function is on the React context.  If you're not familiar with React, just ignore this.
@@ -44,7 +46,7 @@ to determine if it's a mediaQuery, mixin, pseudo-selector, or css rule.
 
 ## Css arguments
 The arguments to the css function can be strings, arrays, and falsey values.  Falsey values are removed and nested arrays of any depth are flattened.
-Any non-empty string is interpreted as a style, so if you're using a string as a conditional, make sure to convert it to a boolean with !!.
+
 ```
 const lineItemStyle = css(
   'p:0',
@@ -53,9 +55,10 @@ const lineItemStyle = css(
 );
 ```
 
+
 ## Configuration
 cssProps and cssVals (css prop and value abbreviations) are stable and can be imported directly from habu.  You have to option of extending these objects if
-you want to add more abbreviations.  Any breaking change to the abbreviations might only happen during a major version release.
+you want to add more abbreviations.  Any breaking change to the abbreviations should only be possible during a major version release.
 
 ```
 import { configureCss, cssProps, cssVals } from 'habu';
@@ -87,7 +90,9 @@ css('b: 1px s #888')   // { border: '1px s #888' }  invalid css
 
 
 ## Theme
-Theme is an object that can have as many levels as you want, but no arrays.  A typical theme might have colors, breakpoints, and complex css values like shadows or transitions.
+Theme is an object that can have as many levels as you want, but no arrays.
+A typical theme might have colors, breakpoints, and complex css values like shadows or transitions.
+
 ```
 const theme = {
   colors: {
@@ -102,6 +107,7 @@ const theme = {
   }
 };
 ```
+
 
 ### Configuring css with the theme
 In addition to the theme, config accepts an array 'prefixesToRemove'.
@@ -119,19 +125,22 @@ configureCss({ theme, prefixesToRemove: ['colors'] })
 css('c:@primary')
 ```
 
+
 ### Examples of using theme variables
 These examples assume you've included the corresponding abbreviations in the config.
 ```
-css('c:@primary')                // { color: 'rgb(38, 177, 32)' }
-css('>@bp.mobile(m:25)')         // '@media (min-width: 600px)' { margin: 25 }
+css('c:@primary')           // { color: 'rgb(38, 177, 32)' }
+css('>@bp.mobile(m:25)')    // '@media (min-width: 600px)' { margin: 25 }
 css('b:1px solid @accent')  // { border: '1px solid rgb(214, 123, 237)' }
 ```
+
 
 ## Pseudo-selectors
 ```
 css(':hover(bgc:#888)')      // { ':hover': { backgroundColor: '#888' } }
 css(':active(bgc:#2592a1)')  // { ':active': { backgroundColor: '#2592a1' } }
 ```
+
 
 ## Media queries
 If vw or vh is missing, it's assumed to be vw.
@@ -141,6 +150,7 @@ css('vw<40em(d:b)')  // '@media (max-width: 40em)': { display: 'block' }
 css('<40em(d:b)')    // '@media (max-width: 40em)': { display: 'block' }
 css('vh>100(d:b)')   // '@media (min-height: 100px)': { display: 'block' }
 ```
+
 
 ## Mixins
 A mixin is a function with any arity, but all arguments must be strings.
@@ -163,10 +173,12 @@ export function square(size) {
 }
 ```
 
+
 ### Using a mixin
 ```
 css(`bg:url(${ICON_URL})`, 'pngIcon(40px)')
 ```
+
 
 ## Moving forward
 
