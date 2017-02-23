@@ -183,4 +183,3 @@ css(`bg:url(${ICON_URL})`, 'pngIcon(40px)')
 ## Moving forward
 
 Please create an issue for any bug report, feature-request, etc.
-I will continue to work on improving the abbreviations, building a docs page, and creating some usage examples.
