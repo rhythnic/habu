@@ -180,6 +180,41 @@ css(`bg:url(${ICON_URL})`, 'pngIcon(40px)')
 ```
 
 
+## Use with aphrodite
+The css.styles method returns an array of aphrodite stylesheets.  If using both habu and aphrodite,
+you should consider renaming habu's css method to something else.  This example is the same one from
+the top of the page, but habu's css function is called 'habu' on the React context.
+
+```
+import React from 'react';
+import { css, StyleSheet } from 'aphrodite';
+
+
+function MyComponent(props, { habu }) {
+  const itemStyle = css(styles.lineItem, habu.styles(':hover(bg:@accentColor)'));
+
+  return (
+    <ul className={css('p:0', 'm:0', 'lineHeight:1.5')}>
+      {props.items.map((item, i) => (
+        <li key={i} className={itemStyle}>{item}</li>  
+      ))}
+    </ul>
+  );
+}
+
+const styles = StyleSheet.create({
+  lineItem: {
+    display: 'block',
+    '@media(min-width: 900px)': {
+      display: 'inline-block',
+      width: '50%'
+    }
+  }
+})
+```
+
+
+
 ## Moving forward
 
 Please create an issue for any bug report, feature-request, etc.
