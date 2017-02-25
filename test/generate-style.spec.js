@@ -12,9 +12,12 @@ test('themeVar', () => {
 
 test('formatStyleClassName', () => {
   expect(styler.formatStyleClassName('d:ib')).toBe('dib');
+  expect(styler.formatStyleClassName('c:#888')).toBe('c888');
+  expect(styler.formatStyleClassName('bg:0 0')).toBe('bg00');
   expect(styler.formatStyleClassName(':hover(c:@blue)')).toBe('hovercblue');
   expect(styler.formatStyleClassName('center(both)')).toBe('centerboth');
   expect(styler.formatStyleClassName('>900(m:0)')).toBe('vw900m0');
+  expect(styler.formatStyleClassName('boxShadow:.2s cubic-bezier(.4,0,1,1)')).toBe('boxShadow2scubic-bezier4011');
 });
 
 test('flattenTheme', () => {
