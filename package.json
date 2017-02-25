@@ -1,6 +1,6 @@
 {
   "name": "habu",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Concise inline styles with theme and mixin support, powered by aphrodite.",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
