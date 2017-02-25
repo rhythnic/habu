@@ -194,7 +194,7 @@ function MyComponent(props, { habu }) {
   const itemStyle = css(styles.lineItem, habu.styles(':hover(bg:@accentColor)'));
 
   return (
-    <ul className={css('p:0', 'm:0', 'lineHeight:1.5')}>
+    <ul className={habu('p:0', 'm:0', 'lineHeight:1.5')}>
       {props.items.map((item, i) => (
         <li key={i} className={itemStyle}>{item}</li>  
       ))}
