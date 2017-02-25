@@ -10,11 +10,8 @@ export default function configureCss(config) {
   const getStylesheet = getProp(stylesheetCache);
   const notCached = x => !getStylesheet(x);
 
-  return function css(...styleArray) {
-
-    const cacheKey = styleArray.join('_');
-    if (cssCache[cacheKey]) return cssCache[cacheKey];
-
+  // styleArrayToStyleSheets :: [string|array|boolean] -> [StyleSheets]
+  function styleArrayToStyleSheets(...styleArray) {
     styleArray = flattenArray(styleArray).filter(isNonEmptyString);
     const formattedClasses = styleArray.map(styler.formatStyleClassName);
 
@@ -27,7 +24,17 @@ export default function configureCss(config) {
       Object.assign(stylesheetCache, StyleSheet.create(styler.stylesheetInput(newStyles)));
     }
 
-    cssCache[cacheKey] = aphroditeCss(formattedClasses.map(getStylesheet));
+    return formattedClasses.map(getStylesheet);
+  }
+
+  function css(...styleArray) {
+    const cacheKey = styleArray.join('_');
+    if (cssCache[cacheKey]) return cssCache[cacheKey];
+    cssCache[cacheKey] = aphroditeCss(styleArrayToStyleSheets(...styleArray));
     return cssCache[cacheKey];
   }
+
+  css.styles = styleArrayToStyleSheets;
+
+  return css;
 }
