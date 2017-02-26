@@ -18,7 +18,7 @@ npm install --save aphrodite habu
 
 ```
 function MyComponent(props, { css }) {
-  const itemStyle = css('d:b', '>900px(d:ib, w:50%)', ':hover(bg:@accentColor)');
+  const itemStyle = css('d:b', '>900px(d:ib; w:50%)', ':hover(bg:@accentColor)');
 
   return (
     <ul className={css('p:0', 'm:0', 'lineHeight:1.5')}>
@@ -141,6 +141,12 @@ css(':hover(bgc:#888)')      // { ':hover': { backgroundColor: '#888' } }
 css(':active(bgc:#2592a1)')  // { ':active': { backgroundColor: '#2592a1' } }
 ```
 
+Be sure to separate the styles within the pseudo-selector with a semi-colon.
+
+```
+css(':hover(bgc:#888; c:rgb(255,255,255))')
+```
+
 
 ## Media queries
 If vw or vh is missing, it's assumed to be vw.
@@ -149,6 +155,12 @@ If vw or vh is missing, it's assumed to be vw.
 css('vw<40em(d:b)')  // '@media (max-width: 40em)': { display: 'block' }
 css('<40em(d:b)')    // '@media (max-width: 40em)': { display: 'block' }
 css('vh>100(d:b)')   // '@media (min-height: 100px)': { display: 'block' }
+```
+
+Like with pseduo-selectors, be sure to separate the styles within the media-query with a semi-colon.
+
+```
+css('>600(bgc:#888; c:rgb(255,255,255))')
 ```
 
 
@@ -177,6 +189,12 @@ export function square(size) {
 ### Using a mixin
 ```
 css(`bg:url(${ICON_URL})`, 'pngIcon(40px)')
+```
+
+Separate the arguments with a semi-colon.
+
+```
+css('spin(2s; loop)'
 ```
 
 

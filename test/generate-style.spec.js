@@ -37,7 +37,7 @@ test('buildMediaQueryString', () => {
   expect(styler.buildMediaQueryString(match)).toBe('@media (max-height: 20em)');
   match = styler.MEDIA_QUERY_REGEX.exec('>20em(fx:1)');
   expect(styler.buildMediaQueryString(match)).toBe('@media (min-width: 20em)');
-  match = styler.MEDIA_QUERY_REGEX.exec('<@sizes.mobile(fx:1)');
+  match = styler.MEDIA_QUERY_REGEX.exec('<@sizes.mobile(fx:1; mr:20)');
   expect(styler.buildMediaQueryString(match)).toBe('@media (max-width: 500px)');
 });
 
@@ -56,7 +56,9 @@ test('pseudoSelectorStyle', () => {
   let expected = { '::after': { content: '|' } };
   expect(styler.pseudoSelectorStyle('::after(content:|)')).toEqual(expected);
   expected = {':nth-child(2)': { marginBottom: 10, color: config.theme.colors.red } };
-  expect(styler.pseudoSelectorStyle(':nth-child(2)(mb:10, c:@red)')).toEqual(expected);
+  expect(styler.pseudoSelectorStyle(':nth-child(2)(mb:10; c:@red)')).toEqual(expected);
+  expected = { ':focus': { backgroundColor: 'rgba(158,158,158,.4)', color: 'black' } };
+  expect(styler.pseudoSelectorStyle(':focus(bgc:rgba(158,158,158,.4); c:black)')).toEqual(expected);
   expect(styler.pseudoSelectorStyle('m:0')).toBeUndefined();
 });
 
