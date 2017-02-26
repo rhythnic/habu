@@ -194,7 +194,7 @@ css(`bg:url(${ICON_URL})`, 'pngIcon(40px)')
 Separate the arguments with a semi-colon.
 
 ```
-css('spin(2s; loop)'
+css('spin(2s; loop)')
 ```
 
 
