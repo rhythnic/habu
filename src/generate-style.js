@@ -6,6 +6,7 @@ export default class StyleGenerator {
     this.NUMBER_REGEX =  /^-?[0-9]+$/;
     this.MIXIN_REGEX = /^([^\(]+)\(([^\)]+)/;
     this.MEDIA_QUERY_REGEX = /^(vw|vh)?(>|<)([^\(]+)\((.*)\)/;
+    this.PSEUDO_SEL_REGEX = /^(:[^\(]*)(\(.*\))?\((.*)\)/;
     this.CLASSNAME_REGEX = /[@:\.\(\)><,# ]/g;
 
     this.formatStyleClassName = this.formatStyleClassName.bind(this);
@@ -51,17 +52,18 @@ export default class StyleGenerator {
   }
 
   pseudoSelectorStyle(styleTxt) {
-    if (styleTxt.indexOf(':') !== 0) return;
-    const styleIndex = styleTxt.lastIndexOf('(');
-    const pseudoSelector = styleTxt.slice(0, styleIndex);
-    const styleArray = styleTxt.slice(styleIndex + 1, -1).split(',').map(trim);
-    return { [pseudoSelector]: this.reduceStyleArray(styleArray) };
+    const match = this.PSEUDO_SEL_REGEX.exec(styleTxt);
+    if (!match) return;
+    const selector = `${match[1]}${match[2] || ''}`;
+    const styleArray = match[3].split(';').map(trim);
+    const styles = this.reduceStyleArray(styleArray);
+    return { [selector]: styles };
   }
 
   mediaQueryStyle(styleTxt) {
     const match = this.MEDIA_QUERY_REGEX.exec(styleTxt);
     if (!match) return;
-    const styleArray = match[4].split(',').map(trim);
+    const styleArray = match[4].split(';').map(trim);
     const mediaQuery = this.buildMediaQueryString(match);
     return { [mediaQuery]: this.reduceStyleArray(styleArray) };
   }
@@ -73,7 +75,7 @@ export default class StyleGenerator {
     if (typeof this.mixins[fnName] !== 'function') return;
     const styleArray = this.mixins[fnName].apply(
       { mixins: this.mixins },
-      fnArgString.split(',').map(trim)
+      fnArgString.split(';').map(trim)
     );
     return this.reduceStyleArray(styleArray);
   }

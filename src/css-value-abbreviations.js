@@ -302,6 +302,10 @@ export default {
     fx: 'flex'
   },
 
+  outline: {
+    n: 'none'
+  },
+
   listStyle: listStyleType,
   listStyleType,
 
