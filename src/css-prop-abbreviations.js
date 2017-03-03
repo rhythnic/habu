@@ -21,8 +21,8 @@ export default {
 
   // height
   h: 'height',
-  mxh: 'minHeight',
-  mnh: 'maxHeight',
+  mnh: 'minHeight',
+  mxh: 'maxHeight',
 
   // positioning
   bxs: 'boxSizing',
