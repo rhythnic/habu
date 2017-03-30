@@ -7,7 +7,7 @@ export default class StyleGenerator {
     this.MIXIN_REGEX = /^([^\(]+)\(([^\)]+)/;
     this.MEDIA_QUERY_REGEX = /^(vw|vh)?(>|<)([^\(]+)\((.*)\)/;
     this.PSEUDO_SEL_REGEX = /^(:[^\(]*)(\(.*\))?\((.*)\)/;
-    this.CLASSNAME_REGEX = /[@:\.\(\)><,# ;\/\\]/g;
+    this.CLASSNAME_REGEX = /[@:\.\(\)><,#+ ;\/\\]/g;
 
     this.formatStyleClassName = this.formatStyleClassName.bind(this);
 

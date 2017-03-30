@@ -19,6 +19,7 @@ test('formatStyleClassName', () => {
   expect(styler.formatStyleClassName('>900(m:0;br:1px solid #888)')).toBe('vw900m0br1pxsolid888');
   expect(styler.formatStyleClassName('boxShadow:.2s cubic-bezier(.4,0,1,1)')).toBe('boxShadow2scubic-bezier4011');
   expect(styler.formatStyleClassName('bg:no-repeat url(/abc.svg)')).toBe('bgno-repeaturlabcsvg');
+  expect(styler.formatStyleClassName('pl:calc(10px + 20px)')).toBe('plcalc10px20px');
 });
 
 test('flattenTheme', () => {
