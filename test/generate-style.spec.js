@@ -20,6 +20,7 @@ test('formatStyleClassName', () => {
   expect(styler.formatStyleClassName('boxShadow:.2s cubic-bezier(.4,0,1,1)')).toBe('boxShadow2scubic-bezier4011');
   expect(styler.formatStyleClassName('bg:no-repeat url(/abc.svg)')).toBe('bgno-repeaturlabcsvg');
   expect(styler.formatStyleClassName('pl:calc(10px + 20px)')).toBe('plcalc10px20px');
+  expect(styler.formatStyleClassName('w:100%')).toBe('w100')
 });
 
 test('flattenTheme', () => {
