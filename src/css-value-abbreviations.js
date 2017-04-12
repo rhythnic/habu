@@ -299,7 +299,8 @@ export default {
     b: 'block',
     ib: 'inline-block',
     i: 'inline',
-    fx: 'flex'
+    fx: 'flex',
+    n: 'none'
   },
 
   outline: {
