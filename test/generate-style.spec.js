@@ -77,6 +77,8 @@ test('mixinStyle', () => {
   let expected = { position: 'absolute', transform: 'translate(-50%, -50%)', top: '50%', left: '50%' };
   expect(styler.mixinStyle('center(both)')).toEqual(expected);
   expect(styler.mixinStyle('m:0')).toBeUndefined();
+  expected = { position: 'absolute', transform: 'translate(-50%, 0)', left: '50%' };
+  expect(styler.mixinStyle('center()')).toEqual(expected);
 });
 
 test('cssRuleStyle', () => {
