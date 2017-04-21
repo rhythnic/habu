@@ -17,7 +17,10 @@ npm install --save aphrodite habu
 ### Example (React)
 
 ```
-function MyComponent(props, { css }) {
+// import habu from the file where you have configured it
+import css from 'style/habu-configured';
+
+function MyComponent(props) {
   const itemStyle = css('d:b', '>900px(d:ib; w:50%)', ':hover(bg:@accentColor)');
 
   return (
@@ -32,10 +35,10 @@ function MyComponent(props, { css }) {
 
 
 #### Explanation
-In the example, the css function is on the React context.  If you're not familiar with React, just ignore this.
-What matters is that the css function inside of the component has been configured.
-During configuration, you can pass a theme, mixins, and abbreviations.  When calling the css function, the format of the strings are analyzed
-to determine if it's a mediaQuery, mixin, pseudo-selector, or css rule.
+The imported css function has been configured.  During configuration, you can pass a theme,
+mixins, and abbreviations.  When calling the css function, the format of the strings are analyzed
+to determine if it's a mediaQuery, mixin, pseudo-selector, or css rule.  That string is then
+translated into an aphrodite stylesheet item.
 
 * 'm:0' -> { margin: 0 }
 * 'p:0' -> { padding: 0 }
@@ -45,7 +48,8 @@ to determine if it's a mediaQuery, mixin, pseudo-selector, or css rule.
 
 
 ## Css arguments
-The arguments to the css function can be strings, arrays, and falsey values.  Falsey values are removed and nested arrays of any depth are flattened.
+The arguments to the css function can be strings, arrays, and falsey values.
+Falsey values are removed and nested arrays of any depth are flattened.
 
 ```
 const lineItemStyle = css(
@@ -57,10 +61,13 @@ const lineItemStyle = css(
 
 
 ## Configuration
-cssProps and cssVals (css prop and value abbreviations) are stable and can be imported directly from habu.  You have to option of extending these objects if
-you want to add more abbreviations.  Any breaking change to the abbreviations should only be possible during a major version release.
+cssProps and cssVals (css prop and value abbreviations) are imported from habu.  You have to option of extending these objects if
+you want to add more abbreviations or overwrite any of them.
+Any breaking change to the abbreviations should only be possible during a major version release.
 
 ```
+// style/habu-configured.js
+
 import { configureCss, cssProps, cssVals } from 'habu';
 import theme from './theme';
 import mixins from './mixins';
@@ -94,7 +101,9 @@ Theme is an object that can have as many levels as you want, but no arrays.
 A typical theme might have colors, breakpoints, and complex css values like shadows or transitions.
 
 ```
-const theme = {
+// style/theme.js
+
+export default {
   colors: {
     primary: 'rgb(38, 177, 32)',
     accent: 'rgb(214, 123, 237)'
@@ -170,7 +179,7 @@ The mixin should return an array of strings which are applied as arguments to th
 The strings can contain all the goodies that you can use in the css function.
 
 ```
-// mixins.js
+// style/mixins.js
 
 export function pngIcon(size) {
   return [
