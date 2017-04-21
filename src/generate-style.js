@@ -4,7 +4,7 @@ export default class StyleGenerator {
   constructor(config) {
     this.VARIABLE_REGEX = /@[^ \(]+/g;
     this.NUMBER_REGEX =  /^-?[0-9]+$/;
-    this.MIXIN_REGEX = /^([^\(]+)\(([^\)]+)/;
+    this.MIXIN_REGEX = /^([^\(]+)\(([^\)]*)/;
     this.MEDIA_QUERY_REGEX = /^(vw|vh)?(>|<)([^\(]+)\((.*)\)/;
     this.PSEUDO_SEL_REGEX = /^(:[^\(]*)(\(.*\))?\((.*)\)/;
     this.CLASSNAME_REGEX = /[@:\.\(\)><,#+% ;\/\\]/g;
@@ -71,11 +71,13 @@ export default class StyleGenerator {
   mixinStyle(styleTxt) {
     const [prop, val] = styleTxt.split(':').map(trim);
     if (val != null) return;
-    const [_, fnName, fnArgString] = this.MIXIN_REGEX.exec(prop);
+    const match = this.MIXIN_REGEX.exec(prop);
+    if (!match) return;
+    const fnName = match[1];
     if (typeof this.mixins[fnName] !== 'function') return;
     const styleArray = this.mixins[fnName].apply(
       { mixins: this.mixins },
-      fnArgString.split(';').map(trim)
+      match[2] ? match[2].split(';').map(trim) : void 0
     );
     return this.reduceStyleArray(styleArray);
   }
