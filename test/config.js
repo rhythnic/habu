@@ -1,5 +1,5 @@
-import { cssProps, cssVals } from '../src/index';
-import { center } from './mixins';
+import { cssProps, cssVals } from '../src/index'
+import { center } from './mixins'
 
 export default {
   theme: {

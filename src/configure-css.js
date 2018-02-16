@@ -1,40 +1,29 @@
-import { StyleSheet, css as aphroditeCss } from 'aphrodite';
-import { getProp, isNonEmptyString, flattenArray } from './utils';
-import StyleGenerator from './generate-style';
+import { StyleSheet, css as aphroditeCss } from 'aphrodite'
+import { isNonEmptyString, flattenArray } from './utils'
+import StyleGenerator from './generate-style'
 
+export default function configureCss (config) {
+  const classNameCache = {}
+  const stylesheetCache = {}
+  const styler = new StyleGenerator(config)
 
-
-export default function configureCss(config) {
-  let stylesheetCache = {}, cssCache = {};
-  const styler = new StyleGenerator(config);
-  const getStylesheet = getProp(stylesheetCache);
-  const notCached = x => !getStylesheet(x);
-
-  // styleArrayToStyleSheets :: [string|array|boolean] -> [StyleSheets]
-  function styleArrayToStyleSheets(...styleArray) {
-    styleArray = flattenArray(styleArray).filter(isNonEmptyString);
-    const formattedClasses = styleArray.map(styler.formatStyleClassName);
-
-    const newStyles = styleArray.reduce((acc, x, i) => {
-      if (notCached(formattedClasses[i])) acc.push(x);
-      return acc;
-    }, []);
-
-    if (newStyles.length) {
-      Object.assign(stylesheetCache, StyleSheet.create(styler.stylesheetInput(newStyles)));
-    }
-
-    return formattedClasses.map(getStylesheet);
+  function css (...styleArray) {
+    styleArray = flattenArray(styleArray).filter(isNonEmptyString)
+    const cacheKey = JSON.stringify(styleArray)
+    if (classNameCache[cacheKey]) return classNameCache[cacheKey]
+    const stylesheet = StyleSheet.create({ habu: styler.reduceStyleArray(styleArray) })
+    classNameCache[cacheKey] = aphroditeCss(stylesheet.habu)
+    return classNameCache[cacheKey]
   }
 
-  function css(...styleArray) {
-    const cacheKey = styleArray.join('_');
-    if (cssCache[cacheKey]) return cssCache[cacheKey];
-    cssCache[cacheKey] = aphroditeCss(styleArrayToStyleSheets(...styleArray));
-    return cssCache[cacheKey];
+  css.styles = (...styleArray) => {
+    styleArray = flattenArray(styleArray).filter(isNonEmptyString)
+    const cacheKey = JSON.stringify(styleArray)
+    if (stylesheetCache[cacheKey]) return stylesheetCache[cacheKey]
+    const stylesheet = StyleSheet.create({ habu: styler.reduceStyleArray(styleArray) })
+    stylesheetCache[cacheKey] = stylesheet.habu
+    return stylesheetCache[cacheKey]
   }
 
-  css.styles = styleArrayToStyleSheets;
-
-  return css;
+  return css
 }
