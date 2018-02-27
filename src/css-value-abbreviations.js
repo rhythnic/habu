@@ -52,6 +52,7 @@ const timingFunction = {
 };
 
 const listStyleType = {
+  n: 'none',
   d: 'disc',
   c: 'circle',
   s: 'square',
